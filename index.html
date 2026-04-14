@@ -794,5 +794,39 @@ function abrirModal(rid,nombre,wsp,espacio,personas,anticipo,total){
 
 renderEspacios();
 </script>
+  <script>
+const CONFIG = {
+  WA_NUMBER: '573017931397',
+  VIP_PRICE: 200000,
+  INSTAGRAM: 'https://instagram.com/',
+  TIKTOK: 'https://tiktok.com/',
+  BRAND_NAME: 'REBECCA',
+  TAGLINE: 'SYSTEM ONLINE • ACCESS CONTROLLED'
+};
+
+function goWhatsApp(vip) {
+  const message = `Hola Rebecca, quiero ${vip}. Precio: $${CONFIG.VIP_PRICE}`;
+  const url = `https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
+
+window.onload = () => {
+  const brand = document.getElementById('brand');
+  if (brand) brand.innerText = CONFIG.BRAND_NAME;
+
+  const tagline = document.getElementById('tagline');
+  if (tagline) tagline.innerText = CONFIG.TAGLINE;
+
+  document.querySelectorAll('.price').forEach(p => {
+    p.innerText = '$' + CONFIG.VIP_PRICE.toLocaleString();
+  });
+
+  const ig = document.getElementById('ig');
+  if (ig) ig.href = CONFIG.INSTAGRAM;
+
+  const tt = document.getElementById('tt');
+  if (tt) tt.href = CONFIG.TIKTOK;
+};
+</script>
 </body>
 </html>
