@@ -499,13 +499,14 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
       ║  Ejemplo: <option>Sábado 3 de mayo</option>║
       ╚═══════════════════════════════════════════╝
     -->
-    <select id="v-fecha">
-      <option value="">Fecha del evento *</option>
-      <option>Sábado 19 de abril</option>
-      <option>Sábado 26 de abril</option>
-      <option>Sábado 3 de mayo</option>
-      <option>Sábado 10 de mayo</option>
-    </select>
+    <select id="fechaEvento">
+  <option>Jueves 17 de abril</option>
+  <option>Viernes 18 de abril</option>
+  <option>Sábado 19 de abril</option>
+  <option>Jueves 24 de abril</option>
+  <option>Viernes 25 de abril</option>
+  <option>Sábado 26 de abril</option>
+</select>
 
     <!-- ── SOLICITUDES ── -->
     <span class="form-label">SOLICITUDES PARA TU CELEBRACIÓN</span>
@@ -715,6 +716,20 @@ Total: $${total} COP
 Quiero confirmar mi compra`
   );
   window.open(`https://wa.me/573154398111?text=${msg}`);
+}
+</script>
+   <script>
+const fechasLlenas = [
+  "Sábado 19 de abril"
+];
+
+const select = document.getElementById("fechaEvento");
+
+for (let i = 0; i < select.options.length; i++) {
+  if (fechasLlenas.includes(select.options[i].text)) {
+    select.options[i].text += " (AGOTADO)";
+    select.options[i].disabled = true;
+  }
 }
 </script>
 </body>
