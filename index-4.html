@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REBECCA • EXPERIENCE</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   VARIABLES — modifica aquí los colores principales fácilmente
+   ============================================================ */
+:root {
+  --cyan:        #00d4ff;
+  --cyan-dim:    rgba(0,212,255,0.12);
+  --green:       #00ff88;
+  --green-dim:   rgba(0,255,136,0.1);
+  --gold:        #ffd166;
+  --gold-dim:    rgba(255,209,102,0.1);
+  --dark:        #04040c;
+  --dark2:       #08081a;
+  --card-bg:     rgba(255,255,255,0.025);
+  --border-c:    rgba(0,212,255,0.14);
+  --border-g:    rgba(0,255,136,0.18);
+  --border-gold: rgba(255,209,102,0.25);
+  --text-muted:  rgba(255,255,255,0.38);
+  --text-mid:    rgba(255,255,255,0.6);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  font-family: 'Rajdhani', sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none; z-index: 0;
+}
+.glow-top {
+  position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 500px;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.07) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.glow-bottom {
+  position: fixed; bottom: -200px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(0,255,136,0.05) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+.container {
+  position: relative; z-index: 1;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 20px 140px;
+}
+
+/* ── HEADER / LOGO ── */
+.header { text-align: center; padding: 60px 0 20px; }
+
+.logo-frame {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 28px;
+}
+
+.logo-img {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid rgba(0,212,255,0.5);
+  box-shadow: 0 0 0 8px rgba(0,212,255,0.04), 0 0 60px rgba(0,212,255,0.2), 0 0 120px rgba(0,212,255,0.08);
+}
+
+.logo-fallback {
+  display: none;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,212,255,0.5);
+  background: radial-gradient(circle at 40% 35%, rgba(0,212,255,0.15), var(--dark2));
+  align-items: center; justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 52px; font-weight: 800;
+  color: var(--cyan);
+  box-shadow: 0 0 60px rgba(0,212,255,0.2);
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.ring-1 { width: 190px; height: 190px; border-color: rgba(0,212,255,0.2); animation: spinRing 18s linear infinite; }
+.ring-2 { width: 222px; height: 222px; border-color: rgba(0,255,136,0.1); animation: spinRing 30s linear infinite reverse; }
+.ring-dot {
+  position: absolute;
+  width: 7px; height: 7px;
+  background: var(--cyan);
+  border-radius: 50%;
+  top: -3.5px; left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan);
+}
+.ring-dot-g { background: var(--green); box-shadow: 0 0 10px var(--green), 0 0 20px var(--green); top: auto; bottom: -3.5px; }
+@keyframes spinRing { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+.brand-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 52px; font-weight: 800;
+  letter-spacing: 14px; line-height: 1;
+  background: linear-gradient(160deg, #ffffff 0%, var(--cyan) 60%, var(--green) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 8px;
+}
+.brand-tagline {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8px; letter-spacing: 6px;
+  color: var(--green); opacity: 0.7; margin-bottom: 16px;
+}
+.status-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 18px;
+  border: 1px solid var(--border-c); border-radius: 30px;
+  font-size: 10px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.4); background: rgba(0,212,255,0.03);
+  margin-bottom: 12px;
+}
+.dot-live {
+  width: 7px; height: 7px;
+  background: var(--green); border-radius: 50%;
+  box-shadow: 0 0 8px var(--green);
+  animation: blink 2s ease-in-out infinite; flex-shrink: 0;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.location-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text-muted); letter-spacing: 1px;
+}
+
+/* ── REDES SOCIALES ── */
+.social-wrap { margin: 36px 0; text-align: center; }
+.social-eyebrow {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8px; letter-spacing: 5px;
+  color: rgba(255,255,255,0.2); margin-bottom: 16px;
+}
+.social-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.soc {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-size: 12px; font-weight: 600; letter-spacing: 2px;
+  transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  backdrop-filter: blur(10px);
+}
+.soc svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+.soc:hover { transform: translateY(-3px) scale(1.04); }
+.soc.ig:hover  { border-color: #e1306c; color: #e1306c; background: rgba(225,48,108,0.06); box-shadow: 0 4px 20px rgba(225,48,108,0.15); }
+.soc.tt:hover  { border-color: #fff;    color: #fff;    background: rgba(255,255,255,0.05); box-shadow: 0 4px 20px rgba(255,255,255,0.08); }
+.soc.wa:hover  { border-color: #25D366; color: #25D366; background: rgba(37,211,102,0.06); box-shadow: 0 4px 20px rgba(37,211,102,0.15); }
+
+/* ── DIVISORES ── */
+.divider { display: flex; align-items: center; gap: 14px; margin: 44px 0; opacity: 0.3; }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; }
+.divider::before { background: linear-gradient(90deg, transparent, var(--cyan)); }
+.divider::after  { background: linear-gradient(90deg, var(--cyan), transparent); }
+.divider span { font-family: 'Orbitron', sans-serif; font-size: 9px; letter-spacing: 2px; color: var(--cyan); }
+
+.sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.sec-head h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 5px;
+  color: var(--cyan); white-space: nowrap;
+}
+.sec-head::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-c), transparent); }
+
+/* ── EXPERIENCIA ── */
+.exp-block {
+  padding: 22px 22px 22px 20px;
+  border-left: 2px solid rgba(0,212,255,0.2);
+  background: linear-gradient(90deg, rgba(0,212,255,0.03), transparent);
+  border-radius: 0 10px 10px 0;
+}
+.exp-block p { font-size: 15px; line-height: 1.9; color: var(--text-muted); font-weight: 300; letter-spacing: 0.4px; }
+
+/* ── VIP TABS ── */
+.vip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.vip-tab {
+  padding: 14px;
+  border: 1px solid var(--border-gold); border-radius: 12px;
+  background: var(--gold-dim);
+  cursor: pointer; text-align: center;
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.vip-tab::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,209,102,0.5), transparent);
+}
+.vip-tab:hover, .vip-tab.active {
+  border-color: var(--gold);
+  background: rgba(255,209,102,0.14);
+  box-shadow: 0 0 20px rgba(255,209,102,0.1);
+  transform: translateY(-1px);
+}
+.vip-tab-num { font-family: 'Orbitron', sans-serif; font-size: 18px; font-weight: 800; color: var(--gold); }
+.vip-tab-label { font-size: 9px; letter-spacing: 2px; color: rgba(255,209,102,0.5); margin-top: 3px; }
+
+/* ── CARDS ── */
+.card { border-radius: 18px; padding: 26px; background: var(--card-bg); backdrop-filter: blur(20px); position: relative; overflow: hidden; }
+.card-vip { border: 1px solid var(--border-gold); }
+.card-vip::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,209,102,0.6), transparent); }
+.card-vip::after { content: ''; position: absolute; top: -60px; right: -60px; width: 160px; height: 160px; background: radial-gradient(circle, rgba(255,209,102,0.06), transparent 70%); pointer-events: none; }
+.card-main { border: 1px solid var(--border-c); }
+.card-main::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,0.5), transparent); }
+
+.card-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 12px; border-radius: 5px;
+  font-family: 'Orbitron', sans-serif; font-size: 8px; letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.badge-gold { background: rgba(255,209,102,0.08); border: 1px solid rgba(255,209,102,0.2); color: var(--gold); }
+.badge-cyan { background: var(--cyan-dim); border: 1px solid var(--border-c); color: var(--cyan); }
+
+.price-big { font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+.price-gold { color: var(--gold); }
+.price-cyan { color: var(--cyan); }
+.price-note { font-size: 11px; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 14px; }
+
+.includes { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+.chip { padding: 4px 10px; border-radius: 5px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+.chip-gold { background: rgba(255,209,102,0.08); border: 1px solid rgba(255,209,102,0.2); color: rgba(255,209,102,0.7); }
+.chip-cyan { background: var(--cyan-dim); border: 1px solid var(--border-c); color: rgba(0,212,255,0.7); }
+
+#mesa-seleccionada { font-family: 'Orbitron', sans-serif; font-size: 13px; letter-spacing: 3px; color: var(--gold); margin-bottom: 16px; }
+
+/* ── FORM ── */
+.form-label { font-family: 'Orbitron', sans-serif; font-size: 8px; letter-spacing: 3px; color: rgba(255,255,255,0.22); margin: 18px 0 10px; display: block; }
+input, select, textarea {
+  width: 100%; padding: 12px 15px; margin-bottom: 10px;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.07); border-radius: 9px;
+  color: #fff; font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; font-weight: 500; letter-spacing: 0.4px;
+  outline: none; transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus { border-color: rgba(0,212,255,0.35); background: rgba(0,212,255,0.03); }
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.18); }
+select option { background: #08081a; color: #fff; }
+textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+/* ── BOTONES ── */
+.btn {
+  width: 100%; padding: 15px; border: none; border-radius: 11px;
+  font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 3px;
+  cursor: pointer; transition: all 0.22s; position: relative; overflow: hidden;
+}
+.btn::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0); transition: background 0.15s; }
+.btn:hover::after { background: rgba(255,255,255,0.08); }
+.btn:active { transform: scale(0.97); }
+.btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+.btn-outline:hover { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); }
+.btn-gold { background: linear-gradient(135deg, #c99a2e, #ffd166, #e6a817); color: #1a0f00; margin-bottom: 8px; box-shadow: 0 4px 24px rgba(255,209,102,0.2); }
+.btn-gold:hover { box-shadow: 0 6px 32px rgba(255,209,102,0.35); transform: translateY(-1px); }
+.btn-cyan { background: linear-gradient(135deg, #0099bb, #00d4ff); color: #001820; margin-bottom: 8px; box-shadow: 0 4px 24px rgba(0,212,255,0.15); }
+.btn-cyan:hover { box-shadow: 0 6px 32px rgba(0,212,255,0.3); transform: translateY(-1px); }
+.btn-green { background: linear-gradient(135deg, #00bb5e, #00ff88); color: #001a0d; box-shadow: 0 4px 24px rgba(0,255,136,0.15); }
+.btn-green:hover { box-shadow: 0 6px 32px rgba(0,255,136,0.3); transform: translateY(-1px); }
+
+.wompi-note {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-top: 14px; padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; line-height: 1.6;
+}
+.wompi-note svg { width: 14px; height: 14px; fill: var(--green); flex-shrink: 0; margin-top: 2px; }
+.field-note { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 10px; line-height: 1.6; letter-spacing: 0.3px; }
+
+/* ── MAIN ENTRADAS ── */
+.qty-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.qty-row input { width: 100%; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 800; color: var(--cyan); padding: 14px; margin-bottom: 0; }
+.qty-btn {
+  width: 48px; height: 48px; flex-shrink: 0;
+  border: 1px solid var(--border-c); border-radius: 9px;
+  background: var(--cyan-dim); color: var(--cyan);
+  font-size: 22px; cursor: pointer; transition: all 0.18s;
+  display: flex; align-items: center; justify-content: center;
+}
+.qty-btn:hover { background: rgba(0,212,255,0.2); }
+.total-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 14px;
+}
+.total-label { font-size: 11px; letter-spacing: 2px; color: var(--text-muted); }
+.total-amount { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; color: var(--cyan); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: rgba(0,255,136,0.12); border: 1px solid var(--green); border-radius: 12px;
+  padding: 12px 22px;
+  font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 2px;
+  color: var(--green); z-index: 9999; opacity: 0; transition: all 0.3s;
+  white-space: nowrap; pointer-events: none; backdrop-filter: blur(20px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── WA FLOAT ── */
+.wa-float {
+  position: fixed; bottom: 28px; right: 22px;
+  width: 60px; height: 60px;
+  background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+  z-index: 999; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.wa-float:hover { transform: scale(1.12); box-shadow: 0 6px 32px rgba(37,211,102,0.55); }
+.wa-float svg { width: 30px; height: 30px; fill: #fff; }
+.wa-pulse { position: absolute; inset: -5px; border-radius: 50%; border: 2px solid rgba(37,211,102,0.35); animation: pulse 2.8s ease-out infinite; }
+@keyframes pulse { 0%{transform:scale(1);opacity:0.6} 100%{transform:scale(1.55);opacity:0} }
+
+/* ── FOOTER ── */
+.footer { text-align: center; margin-top: 60px; padding-bottom: 10px; }
+.footer-logo { font-family: 'Orbitron', sans-serif; font-size: 22px; letter-spacing: 10px; color: rgba(255,255,255,0.07); margin-bottom: 10px; }
+.footer-line { font-size: 11px; color: rgba(255,255,255,0.15); letter-spacing: 1px; line-height: 2; }
+</style>
+</head>
+<body>
+
+<div class="glow-top"></div>
+<div class="glow-bottom"></div>
+
+<div class="container">
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <div class="header">
+    <div class="logo-frame">
+      <!--
+        LOGO: sube "logo.png" a la misma carpeta en GitHub.
+        Si no existe el archivo, se muestra la "R" automáticamente.
+      -->
+      <img src="logo.png" alt="Rebecca" class="logo-img"
+        onerror="this.style.display='none'; document.getElementById('logo-fb').style.display='flex';">
+      <div id="logo-fb" class="logo-fallback">R</div>
+      <div class="ring ring-1">
+        <div class="ring-dot"></div>
+        <div class="ring-dot ring-dot-g"></div>
+      </div>
+      <div class="ring ring-2"></div>
+    </div>
+
+    <div class="brand-name">REBECCA</div>
+    <div class="brand-tagline">SYSTEM ONLINE • ACCESS CONTROLLED</div>
+    <div class="status-pill"><div class="dot-live"></div>LIVE</div>
+    <br>
+    <div class="location-tag">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      C.C Le Meridiem 2 &nbsp;·&nbsp; Piso 2 &nbsp;·&nbsp; Barranquilla
+    </div>
+  </div>
+
+  <!-- ═══════════════ REDES SOCIALES ═══════════════ -->
+  <div class="social-wrap">
+    <div class="social-eyebrow">SÍGUENOS</div>
+    <div class="social-links">
+
+      <!-- INSTRUCCIÓN: cambia el usuario si cambia el Instagram -->
+      <a href="https://instagram.com/Rebecca_zip" target="_blank" class="soc ig">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @REBECCA_ZIP
+      </a>
+
+      <!-- INSTRUCCIÓN: cambia el usuario si cambia el TikTok -->
+      <a href="https://tiktok.com/@Rebecca_zip" target="_blank" class="soc tt">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.69a4.85 4.85 0 01-1-.0z"/></svg>
+        @REBECCA_ZIP
+      </a>
+
+      <!-- INSTRUCCIÓN: cambia el número si cambia el WhatsApp -->
+      <a href="https://wa.me/573154398111?text=Hola, quiero información sobre Rebecca" target="_blank" class="soc wa">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WHATSAPP
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"><span>◆ ◆ ◆</span></div>
+
+  <!-- ═══════════════ EXPERIENCIA ═══════════════ -->
+  <div class="sec-head"><h2>EXPERIENCIA</h2></div>
+  <div class="exp-block">
+    <p>REBECCA no es una discoteca. Es un sistema diseñado para controlar la energía de la noche.
+    Futurismo, inteligencia artificial y Matrix convergen en cada detalle.
+    Cada reserva es una experiencia personalizada — diseñada solo para ti.</p>
+  </div>
+
+  <div class="divider"><span>◆ ◆ ◆</span></div>
+
+  <!-- ═══════════════ RESERVA VIP ═══════════════ -->
+  <div class="sec-head"><h2>RESERVA VIP</h2></div>
+
+  <!--
+    ╔══════════════════════════════════════════╗
+    ║  INSTRUCCIÓN — MESAS VIP                 ║
+    ║  Hay 4 mesas. Todas cuestan $2.000.000.  ║
+    ║  Solo puedes cambiar el nombre/etiqueta  ║
+    ║  de cada mesa si lo necesitas.           ║
+    ╚══════════════════════════════════════════╝
+  -->
+  <div class="vip-grid">
+    <div class="vip-tab active" onclick="seleccionarMesa(this,'MESA 1')">
+      <div class="vip-tab-num">01</div>
+      <div class="vip-tab-label">MESA VIP</div>
+    </div>
+    <div class="vip-tab" onclick="seleccionarMesa(this,'MESA 2')">
+      <div class="vip-tab-num">02</div>
+      <div class="vip-tab-label">MESA VIP</div>
+    </div>
+    <div class="vip-tab" onclick="seleccionarMesa(this,'MESA 3')">
+      <div class="vip-tab-num">03</div>
+      <div class="vip-tab-label">MESA VIP</div>
+    </div>
+    <div class="vip-tab" onclick="seleccionarMesa(this,'MESA 4')">
+      <div class="vip-tab-num">04</div>
+      <div class="vip-tab-label">MESA VIP</div>
+    </div>
+  </div>
+
+  <div class="card card-vip">
+    <div class="card-badge badge-gold">
+      <div class="dot-live" style="width:5px;height:5px;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:none;"></div>
+      ACCESO EXCLUSIVO
+    </div>
+
+    <div id="mesa-seleccionada">MESA 1 SELECCIONADA</div>
+
+    <div class="price-big price-gold">$2.000.000</div>
+    <div class="price-note">COP · 100% consumible en bar</div>
+
+    <div class="includes">
+      <span class="chip chip-gold">15 personas</span>
+      <span class="chip chip-gold">15 manillas</span>
+      <span class="chip chip-gold">Sin entradas individuales</span>
+    </div>
+
+    <!-- ── DATOS PERSONALES ── -->
+    <span class="form-label">DATOS PERSONALES</span>
+    <input id="v-nombre"   placeholder="Nombre completo *" autocomplete="name">
+    <input id="v-cedula"   placeholder="Número de cédula *" type="text" inputmode="numeric">
+    <input id="v-whatsapp" placeholder="WhatsApp (ej: 3001234567) *" type="tel" autocomplete="tel">
+
+    <!-- ── DIRECCIÓN ENVÍO ── -->
+    <span class="form-label">DIRECCIÓN PARA ENVÍO DE MANILLAS</span>
+    <input id="v-direccion" placeholder="Barrio, calle, número, ciudad *">
+
+    <!-- ── EVENTO ── -->
+    <span class="form-label">INFORMACIÓN DEL EVENTO</span>
+    <select id="v-evento">
+      <option value="">Tipo de evento *</option>
+      <option>Cumpleaños</option>
+      <option>Despedida de soltero/a</option>
+      <option>Aniversario</option>
+      <option>Celebración empresarial</option>
+      <option>Otra celebración</option>
+    </select>
+
+    <!--
+      ╔═══════════════════════════════════════════╗
+      ║  INSTRUCCIÓN — FECHAS (ACTUALIZAR SEMANAL)║
+      ║  Agrega o elimina fechas aquí cada semana ║
+      ║  Ejemplo: <option>Sábado 3 de mayo</option>║
+      ╚═══════════════════════════════════════════╝
+    -->
+    <select id="v-fecha">
+      <option value="">Fecha del evento *</option>
+      <option>Sábado 19 de abril</option>
+      <option>Sábado 26 de abril</option>
+      <option>Sábado 3 de mayo</option>
+      <option>Sábado 10 de mayo</option>
+    </select>
+
+    <!-- ── SOLICITUDES ── -->
+    <span class="form-label">SOLICITUDES PARA TU CELEBRACIÓN</span>
+    <textarea id="v-solicitud" placeholder="Cuéntanos qué quieres: decoración, bebidas preferidas, música, sorpresas, nombres para decoración, etc."></textarea>
+
+    <!-- ── CÓDIGO ── -->
+    <input id="v-codigo" placeholder="Código de reserva (se genera automáticamente)" readonly style="opacity:0.5;cursor:default;">
+
+    <!-- ── BOTONES VIP ── -->
+    <div style="margin-top:12px;">
+      <button class="btn btn-outline" onclick="generarCodigo()">⟳ GENERAR CÓDIGO DE RESERVA</button>
+      <!--
+        INSTRUCCIÓN WOMPI:
+        Cuando Wompi esté activo, el botón de abajo enviará al checkout.
+        Por ahora abre WhatsApp. Cuando tengas el link de Wompi,
+        reemplaza en el JS la línea: window.open(`https://wa.me/...`)
+        por: window.open("TU-LINK-DE-WOMPI-AQUI")
+      -->
+      <button class="btn btn-gold" onclick="pagarVIP()">CONFIRMAR RESERVA — PAGAR 50%</button>
+    </div>
+
+    <div class="wompi-note">
+      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      El 50% ($1.000.000) confirma y reserva tu mesa. El saldo restante se cancela el día del evento. Integración de pago Wompi activa próximamente.
+    </div>
+    <p class="field-note">Puedes compartir el código con tu grupo para dividir el pago</p>
+  </div>
+
+  <div class="divider"><span>◆ ◆ ◆</span></div>
+
+  <!-- ═══════════════ ENTRADA GENERAL ═══════════════ -->
+  <div class="sec-head"><h2>ENTRADA GENERAL</h2></div>
+  <div class="card card-main">
+    <div class="card-badge badge-cyan">
+      <div class="dot-live" style="width:5px;height:5px;"></div>
+      DISPONIBLE
+    </div>
+    <div class="price-big price-cyan">$20.000</div>
+    <div class="price-note">COP por persona · Máx. 100 unidades por evento</div>
+
+    <div class="qty-row">
+      <button class="qty-btn" onclick="cambiarCantidad(-1)">−</button>
+      <input id="cantidad" type="number" value="1" min="1" max="100" readonly>
+      <button class="qty-btn" onclick="cambiarCantidad(1)">+</button>
+    </div>
+
+    <div class="total-row">
+      <span class="total-label">TOTAL A PAGAR</span>
+      <span class="total-amount" id="total-main">$20.000</span>
+    </div>
+
+    <button class="btn btn-cyan" onclick="comprarMain()">COMPRAR ENTRADAS</button>
+    <p class="field-note" style="margin-top:10px;">Te contactamos por WhatsApp para confirmar y coordinar la entrega</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">REBECCA</div>
+    <div class="footer-line">
+      C.C Le Meridiem 2 · Piso 2 · Barranquilla<br>
+      @Rebecca_zip &nbsp;·&nbsp; +57 315 439 8111
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/573154398111?text=Hola%2C+quiero+información+sobre+Rebecca" target="_blank" class="wa-float" title="Escríbenos">
+  <div class="wa-pulse"></div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ══════════════ FIREBASE ══════════════ -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script>
+/* ────────────────────────────────────────────
+   FIREBASE — no toques a menos que cambies de proyecto
+   ──────────────────────────────────────────── */
+const firebaseConfig = {
+  apiKey:     "AIzaSyDxfZzYiO3Dhmux1kzXvW2me6EgbAf6ts0",
+  authDomain: "rebecca-bb4e2.firebaseapp.com",
+  projectId:  "rebecca-bb4e2",
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function guardar(data) {
+  try { await db.collection("reservas").add({ ...data, fecha_registro: new Date() }); }
+  catch(e) { console.error("Firebase:", e); }
+}
+
+/* ── Selección de mesa ── */
+let mesaActual = "MESA 1";
+function seleccionarMesa(el, nombre) {
+  document.querySelectorAll('.vip-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  mesaActual = nombre;
+  document.getElementById('mesa-seleccionada').textContent = nombre + " SELECCIONADA";
+}
+
+/* ── Toast ── */
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ── Generar código ── */
+function generarCodigo() {
+  const num  = Math.floor(Math.random() * 9000) + 1000;
+  const mesa = mesaActual.replace(/\D/g,'');
+  document.getElementById('v-codigo').value = "RB-M" + mesa + "-" + num;
+  mostrarToast("✓ CÓDIGO GENERADO");
+}
+
+/* ── Validar VIP ── */
+function validarVIP() {
+  const campos = [
+    ['v-nombre',    'Nombre completo'],
+    ['v-cedula',    'Número de cédula'],
+    ['v-whatsapp',  'WhatsApp'],
+    ['v-direccion', 'Dirección de envío'],
+    ['v-evento',    'Tipo de evento'],
+    ['v-fecha',     'Fecha del evento'],
+  ];
+  for (const [id, label] of campos) {
+    if (!document.getElementById(id).value.trim()) {
+      mostrarToast('⚠ FALTA: ' + label.toUpperCase());
+      document.getElementById(id).focus();
+      return false;
+    }
+  }
+  return true;
+}
+
+/* ── Pagar VIP 50% ── */
+async function pagarVIP() {
+  if (!validarVIP()) return;
+  if (!document.getElementById('v-codigo').value) generarCodigo();
+
+  const data = {
+    tipo:       "VIP 50%",
+    mesa:       mesaActual,
+    nombre:     document.getElementById('v-nombre').value.trim(),
+    cedula:     document.getElementById('v-cedula').value.trim(),
+    whatsapp:   document.getElementById('v-whatsapp').value.trim(),
+    direccion:  document.getElementById('v-direccion').value.trim(),
+    evento:     document.getElementById('v-evento').value,
+    fecha_evt:  document.getElementById('v-fecha').value,
+    solicitud:  document.getElementById('v-solicitud').value.trim(),
+    codigo:     document.getElementById('v-codigo').value,
+  };
+
+  await guardar(data);
+
+  const msg = encodeURIComponent(
+`🎉 *RESERVA VIP – REBECCA*
+━━━━━━━━━━━━━━━━━━
+🪑 Mesa: ${data.mesa}
+📅 Fecha: ${data.fecha_evt}
+👤 Nombre: ${data.nombre}
+🪪 Cédula: ${data.cedula}
+📱 WhatsApp: ${data.whatsapp}
+📍 Dirección: ${data.direccion}
+🎊 Evento: ${data.evento}
+🔑 Código: ${data.codigo}
+━━━━━━━━━━━━━━━━━━
+📝 Solicitudes: ${data.solicitud || 'Ninguna'}
+━━━━━━━━━━━━━━━━━━
+Quiero confirmar mi reserva pagando el 50% ($1.000.000 COP)`
+  );
+
+  /*
+    INSTRUCCIÓN WOMPI:
+    Cuando Wompi esté verificado, reemplaza la línea de abajo con:
+    window.open("https://checkout.wompi.co/l/TU-LINK");
+    y conserva el await guardar(data) de arriba.
+  */
+  window.open(`https://wa.me/573154398111?text=${msg}`);
+}
+
+/* ── Cantidad entradas generales ── */
+const PRECIO_MAIN = 20000;
+function cambiarCantidad(delta) {
+  const inp = document.getElementById('cantidad');
+  let val = Math.max(1, Math.min(100, parseInt(inp.value) + delta));
+  inp.value = val;
+  document.getElementById('total-main').textContent =
+    '$' + (val * PRECIO_MAIN).toLocaleString('es-CO');
+}
+
+/* ── Comprar entradas generales ── */
+async function comprarMain() {
+  const cantidad = parseInt(document.getElementById('cantidad').value);
+  const total    = (cantidad * PRECIO_MAIN).toLocaleString('es-CO');
+  await guardar({ tipo: 'MAIN', cantidad, total: '$' + total });
+  const msg = encodeURIComponent(
+`🎟️ *ENTRADAS GENERALES – REBECCA*
+━━━━━━━━━━━━━━━━
+Cantidad: ${cantidad} entrada(s)
+Total: $${total} COP
+━━━━━━━━━━━━━━━━
+Quiero confirmar mi compra`
+  );
+  window.open(`https://wa.me/573154398111?text=${msg}`);
+}
+</script>
+</body>
+</html>
