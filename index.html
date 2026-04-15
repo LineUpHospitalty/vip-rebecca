@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <style>
-  h1, h2 {
+  
+  <h1 class="logo">REBECCA</h1>
+<p class="subtitle">Inteligencia que controla la noche</p>h2 {
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 2px;
   color: #00f0ff;
   text-shadow: 0 0 10px #00f0ff50;
 }
-
+.logo {
+  font-size: 80px;
+  text-align: center;
+  margin-bottom: 5px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 4px;
+}
+input, select, textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,240,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+.subtitle {
+  text-align: center;
+  color: #8fbcd4;
+  font-size: 14px;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
 label {
   font-size: 14px;
   color: #b8dfff;
@@ -98,6 +122,19 @@ body::after {
 .container {
   position: relative;
   z-index: 1;
+}
+  .card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(45deg, transparent, rgba(0,240,255,0.3), transparent);
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
 }
 </style>
    <head>
