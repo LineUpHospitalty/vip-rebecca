@@ -343,25 +343,71 @@ body::before {
 /* ── VIP TABS ── */
 .vip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
 .vip-tab {
-  padding: 14px;
-  border: 1px solid var(--border-gold); border-radius: 12px;
-  background: var(--gold-dim);
-  cursor: pointer; text-align: center;
-  transition: all 0.2s; position: relative; overflow: hidden;
+  padding: 16px;
+  border: 1px solid rgba(255,209,102,0.25);
+  border-radius: 14px;
+  background: rgba(255,209,102,0.05);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
 }
 .vip-tab::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255,209,102,0.5), transparent);
 }
-.vip-tab:hover, .vip-tab.active {
-  border-color: var(--gold);
-  background: rgba(255,209,102,0.14);
-  box-shadow: 0 0 20px rgba(255,209,102,0.1);
-  transform: translateY(-1px);
+.vip-tab:hover,
+.vip-tab.active {
+  border-color: #ffd166;
+  background: rgba(255,209,102,0.15);
+  box-shadow: 0 0 25px rgba(255,209,102,0.25);
+  transform: translateY(-2px) scale(1.02);
 }
-.vip-tab-num { font-family: 'Orbitron', sans-serif; font-size: 18px; font-weight: 800; color: var(--gold); }
-.vip-tab-label { font-size: 9px; letter-spacing: 2px; color: rgba(255,209,102,0.5); margin-top: 3px; }
+}
+.vip-tab-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #ffd166;
+  text-shadow: 0 0 10px rgba(255,209,102,0.4);
+}
+.vip-tab-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255,209,102,0.7);
+  margin-top: 4px;
+}
+<script>
+const tabs = document.querySelectorAll(".vip-tab");
 
+tabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => {
+    
+    // quitar activos
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    // activar zona del mapa
+    sel(index); // usa tu función existente del mapa
+  });
+});
+</script>
+  .vip-tab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: linear-gradient(45deg, transparent, rgba(255,209,102,0.1), transparent);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.vip-tab:hover::after {
+  opacity: 1;
+}
 /* ── CARDS ── */
 .card { border-radius: 18px; padding: 26px; background: var(--card-bg); backdrop-filter: blur(20px); position: relative; overflow: hidden; }
 .card-vip { border: 1px solid var(--border-gold); }
@@ -877,6 +923,43 @@ for (let i = 0; i < select.options.length; i++) {
     <path d="M600 100 V250 H750" />
   </svg>
 </div>
-  
+  <script>
+let cupos = {
+  "Jueves": 10,
+  "Viernes": 5,
+  "Sábado": 0
+};
+
+function enviarWhatsApp() {
+  const nombre = document.getElementById("nombre").value;
+  const personas = parseInt(document.getElementById("personas").value);
+  const fecha = document.getElementById("fechaEvento").value;
+
+  if (!nombre || !personas) {
+    alert("Completa todos los campos");
+    return;
+  }
+
+  if (cupos[fecha] <= 0) {
+    alert("Fecha agotada");
+    return;
+  }
+
+  if (personas > cupos[fecha]) {
+    alert("No hay suficientes cupos disponibles");
+    return;
+  }
+
+  cupos[fecha] -= personas;
+
+  const mensaje = `Hola, soy ${nombre} y quiero reservar ${personas} personas para ${fecha}`;
+
+  const numero = "573001234567"; // CAMBIA ESTO
+
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+  window.open(url, "_blank");
+}
+</script>
 </body>
 </html>
